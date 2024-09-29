@@ -6,14 +6,14 @@ import {
   MastheadBrand,
   MastheadMain,
   MastheadToggle,
-	Nav,
+  Nav,
   NavExpandable,
   NavItem,
-	NavList,
-	Page,
-	PageSidebar,
+  NavList,
+  Page,
+  PageSidebar,
   PageSidebarBody,
-	SkipToContent
+  SkipToContent, Text
 } from '@patternfly/react-core';
 import { IAppRoute, IAppRouteGroup, routes } from '@app/routes';
 import { BarsIcon } from '@patternfly/react-icons';
@@ -62,6 +62,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
             </g>
           </svg>
         </MastheadBrand>
+        <Text>Sudakov's wineries</Text>
       </MastheadMain>
     </Masthead>
   );

@@ -6,10 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.relational.core.mapping.Table;
+import ru.spmi.winery.enums.BottleType;
 
-@Entity
+import java.sql.Timestamp;
+
 @Data
+@Entity
 @Builder
 @Table(name = "batches")
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -21,9 +23,11 @@ public class Batch {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
-    private WineSort wineSort;
-    private Integer bottleCount;
-    private Short year;
-
+    private Wine wine;
+    private Timestamp fillDate;
+    private Double volume;
+    @Enumerated(EnumType.STRING)
+    private BottleType bottle;
+    private Double price;
 
 }

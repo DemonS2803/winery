@@ -6,7 +6,11 @@ import { GeneralSettings } from '@app/Settings/General/GeneralSettings';
 import { ProfileSettings } from '@app/Settings/Profile/ProfileSettings';
 import { NotFound } from '@app/NotFound/NotFound';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
-import {Wine} from "@app/Wine/Wine";
+import {Wineries} from "@app/Wineries/Wineries";
+import {Vineyard} from "@app/Vineyard/Vineyard";
+import {Batch} from "@app/Batch/Batch";
+import {Store} from "@app/Store/Store";
+import {CustomerBucket} from "@app/CustomerBucket/CustomerBucket";
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -29,44 +33,39 @@ export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
   {
-    component: Wine,
+    component: Wineries,
     exact: true,
-    label: 'Wines',
+    label: 'Wineries',
+    path: '/wineries',
+    title: 'Sudakov | Main Winery',
+  },
+  {
+    component: Vineyard,
+    exact: true,
+    label: 'Vineyards',
+    path: '/vineyards',
+    title: 'Sudakov | Main Vineyards',
+  },
+  {
+    component: Batch,
+    exact: true,
+    label: 'Batch',
+    path: '/batches',
+    title: 'Sudakov | Main Vineyards',
+  },
+  {
+    component: Store,
+    exact: true,
+    label: 'Store',
     path: '/',
-    title: 'PatternFly Seed | Main Wine list'
+    title: 'Sudakov | Main Store',
   },
   {
-    component: Dashboard,
+    component: CustomerBucket,
     exact: true,
-    label: 'Dashboard',
-    path: '/dashboard',
-    title: 'PatternFly Seed | Main Dashboard',
-  },
-  {
-    component: Support,
-    exact: true,
-    label: 'Support',
-    path: '/support',
-    title: 'PatternFly Seed | Support Page',
-  },
-  {
-    label: 'Settings',
-    routes: [
-      {
-        component: GeneralSettings,
-        exact: true,
-        label: 'General',
-        path: '/settings/general',
-        title: 'PatternFly Seed | General Settings',
-      },
-      {
-        component: ProfileSettings,
-        exact: true,
-        label: 'Profile',
-        path: '/settings/profile',
-        title: 'PatternFly Seed | Profile Settings',
-      },
-    ],
+    label: 'Bucket',
+    path: '/bucket',
+    title: 'Sudakov | Main Bucket',
   },
 ];
 
