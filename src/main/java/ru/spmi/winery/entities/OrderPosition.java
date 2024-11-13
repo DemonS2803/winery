@@ -26,4 +26,12 @@ public class OrderPosition {
     private Double price;
     private Integer position;
 
+    public OrderPosition(Bucket bucket, Order order) {
+        this.orderBatchId = new OrderBatchId(bucket.getBatch().getId(), order.getId());
+        this.count = bucket.getCount();
+        this.position = Math.toIntExact(bucket.getId().getPosition());
+        this.price = bucket.getBatch().getPrice();
+
+    }
+
 }

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.spmi.winery.enums.OrderStatus;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -27,5 +28,7 @@ public class Order {
     private Customer customer;
     private Double totalPrice;
     private String shippingAddress;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
 }

@@ -48,7 +48,7 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@RequestBody @Validated AuthDTO loginRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 
         try {
-//            log.info("admin: {} user: {}", DigestUtils.sha256Hex("admin"), DigestUtils.sha256Hex("user"));
+            log.info("admin: {} user: {}", DigestUtils.sha256Hex("admin"), DigestUtils.sha256Hex("user"));
             if (customerService.loginCustomer(loginRequest.getLogin(), DigestUtils.sha256Hex(loginRequest.getPassword()))) {
                 Customer customer = customerService.getCustomer(loginRequest.getLogin());
                 authenticateUser(loginRequest.getLogin(), DigestUtils.sha256Hex(loginRequest.getPassword()));
