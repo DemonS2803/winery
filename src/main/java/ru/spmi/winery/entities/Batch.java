@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 public class Batch {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @ManyToOne
     private Wine wine;

@@ -12,5 +12,5 @@ import ru.spmi.winery.entities.Batch;
 public class CreateInventoryDTO {
 
     private Integer bottles;
-    private Batch batch;
+    private String wineName;
 }

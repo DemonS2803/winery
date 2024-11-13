@@ -18,7 +18,7 @@ const App: React.FunctionComponent = () => {
       <AuthProvider>
         <Router>
           <Switch>
-            <Route path="/login" component={BaseLoginPage} />
+            {/*<Route path="/login" component={BaseLoginPage} />*/}
             <ProtectedRoute path="/" component={AppRoute} />
           </Switch>
         </Router>

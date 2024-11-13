@@ -8,7 +8,10 @@ import {
   TextInput,
   Button,
   Select,
-  SelectOption
+  SelectOption,
+  FormSelect,
+  FormSelectOption,
+  NumberInput
 } from "@patternfly/react-core";
 import {useEffect, useState} from "react";
 import {backendApi} from "@app/utils/axios-config";
@@ -18,11 +21,8 @@ const AddInventorySection: React.FunctionComponent = () => {
 
   const [inventories, setInventories] = useState([])
   const [batches, setBatches] = useState([])
-  const [isBatchDropdownOpen, setIsBatchDropdownOpen] = useState(true)
-  const [newInventory, setNewInventory ] = useState({
-    bottles: 0,
-    batch: {}
-  })
+  const [newInventoryBatch, setNewInventoryBatch] = useState({})
+  const [newInventoryBottles, setNewInventoryBottles] = useState(0)
 
   useEffect(() => {
     const getStoreItemsListData = async () => {
@@ -38,108 +38,70 @@ const AddInventorySection: React.FunctionComponent = () => {
     getBatchsListData()
     getStoreItemsListData()
   }, []);
-  // @ts-ignore
-  const handleAddInventory = () => {
-    backendApi.post('/api/inventory', newInventory)
-      .then(response => {
-        console.log("success add ", response)
-      })
-      .catch(error => {
-        console.error("Error adding inventory:", error);
-      });
+
+
+  const onBottlesChange = (e, value) => {
+    // @ts-ignore
+    setNewInventoryBottles(value);
   };
 
-  const handleUpdateBottles = (bottle) => {
-    backendApi.put('/api/inventory', bottle)
-      .then(() => {
-        // setInventories(
-        //   inventories.map(inv => inv.id === id ? { ...inv, bottles_available: bottlesAvailable } : inv)
-        // );
-      })
-      .catch(error => {
-        console.error("Error updating bottles:", error);
-      });
+  const onBatchChange = (_event: React.FormEvent<HTMLSelectElement>, value: any) => {
+    console.log("new batch ", value)
+    setNewInventoryBatch(value);
+    console.log(newInventoryBatch)
   };
+
+  const addNewInventory = () => {
+    backendApi.post('/inventory', {
+      wineName: newInventoryBatch,
+      bottles: newInventoryBottles
+    })
+  }
+
 
   // @ts-ignore
   return (
     <PageSection>
       <Title headingLevel="h1">Inventory Management</Title>
-      <Form>
-        <FormGroup label="Bottles Total" fieldId="bottles_total">
-          <TextInput
-            type="number"
-            id="bottles_total"
-            value={newInventory.bottles}
-            // @ts-ignore
-            onChange={(value) => setNewInventory({ ...newInventory, bottles: value })}
-          />
-        </FormGroup>
-        <FormGroup label="Bottles Total" fieldId="bottles_total">
-          <TextInput
-            type="number"
-            id="bottles_total"
-            value={newInventory.bottles}
-            // @ts-ignore
-            onChange={(value) => setNewInventory({ ...newInventory, bottles: value })}
-          />
-        </FormGroup>
 
-        {/* Dropdown for selecting Batch ID */}
-        <FormGroup label="Batch ID" fieldId="batch_id">
+      <FormSelect value={newInventoryBatch} onChange={onBatchChange} aria-label="FormSelect Input" ouiaId="BasicFormSelect" >
+        {inventories.map((value) => (
+          <FormSelectOption label={value.batch.wine.name} value={value.batch.wine.name} key={value.id} isDisabled={false}/>
 
-          {/*<Select*/}
-          {/*  id="batch_id"*/}
-          {/*  isOpen={isBatchDropdownOpen}*/}
-          {/*  // toggle={() => setIsBatchDropdownOpen(!isBatchDropdownOpen)}*/}
-          {/*  onSelect={(event, value) => {*/}
-          {/*    setNewInventory({ ...newInventory, batch: value });*/}
-          {/*    setIsBatchDropdownOpen(false);*/}
-          {/*  }}*/}
-          {/*  placeholder={"select batch"}*/}
-          {/*  // selections={newInventory.batch.id}*/}
-          {/*>*/}
-          {batches.map(batch => (
-            <h1>batch {batch.id} {batch.wine.name}</h1>
-
-          ))}
-          {/*</Select>*/}
-        </FormGroup>
-        <Button variant="primary" onClick={handleAddInventory}>Add Inventory</Button>
-      </Form>
-
-      {/* Table for Current Inventories */}
-      <Title headingLevel="h2" style={{ marginTop: '20px' }}>Current Inventories</Title>
-      <table className="pf-c-table pf-m-grid-md" role="grid" aria-label="Inventory Table">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Bottles Available</th>
-          <th>Bottles Total</th>
-          <th>Batch ID</th>
-          <th>Update Bottles</th>
-        </tr>
-        </thead>
-        <tbody>
-        {inventories.map((inventory) => (
-          <tr key={inventory.id}>
-            <td>{inventory.id}</td>
-            <td>{inventory.bottlesAvailable}</td>
-            <td>{inventory.bottlesTotal}</td>
-            <td>{inventory.batchId}</td>
-            <td>
-              <TextInput
-                type="number"
-                value={inventory.bottlesAvailable}
-                onChange={(value) => handleUpdateBottles(inventory)}
-              />
-            </td>
-          </tr>
         ))}
-        </tbody>
-      </table>
+      </FormSelect>
+      <TextInput type={'number'} value={newInventoryBottles} onChange={onBottlesChange}></TextInput>
+      <Button onClick={addNewInventory}>Create</Button>
+
     </PageSection>
   )
 }
 
 export { AddInventorySection };
+
+
+export const FormSelectBasic: React.FunctionComponent = () => {
+  const [formSelectValue, setFormSelectValue] = React.useState('mrs');
+
+  const onChange = (_event: React.FormEvent<HTMLSelectElement>, value: string) => {
+    setFormSelectValue(value);
+  };
+
+  const options = [
+    { value: 'please choose', label: 'Select one', disabled: true },
+    { value: 'mr', label: 'Mr', disabled: false },
+    { value: 'miss', label: 'Miss', disabled: false },
+    { value: 'mrs', label: 'Mrs', disabled: false },
+    { value: 'ms', label: 'Ms', disabled: false },
+    { value: 'dr', label: 'Dr', disabled: false },
+    { value: 'other', label: 'Other', disabled: false }
+  ];
+
+  return (
+    <FormSelect value={formSelectValue} onChange={onChange} aria-label="FormSelect Input" ouiaId="BasicFormSelect">
+      {options.map((option, index) => (
+        <FormSelectOption isDisabled={option.disabled} key={index} value={option.value} label={option.label} />
+      ))}
+    </FormSelect>
+  );
+};

@@ -6,7 +6,10 @@ import {BaseLoginPage} from "@app/Login/BaseLoginPage";
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   // const { isAuthenticated } = useAuth();
   const [authenticated, setAuthenticated] = useState(false)
-
+  // if (localStorage.getItem('token') !== null) {
+  //   setAuthenticated(true)
+  // console.log("setup auth by token!")
+  // }
 
   // console.log(setAuthenticated)
   return (

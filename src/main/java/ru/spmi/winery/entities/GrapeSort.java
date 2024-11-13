@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class GrapeSort {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private String description;
