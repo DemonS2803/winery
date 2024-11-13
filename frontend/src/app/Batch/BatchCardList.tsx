@@ -3,6 +3,7 @@ import axios from "axios";
 import {environment} from "@app/environment";
 import {Flex, FlexItem} from "@patternfly/react-core";
 import {BatchCard} from "@app/Batch/BatchCard";
+import {backendApi} from "@app/utils/axios-config";
 
 export const BatchCardList = () => {
 
@@ -10,8 +11,8 @@ export const BatchCardList = () => {
 
   useEffect(() => {
     const getBatchsListData = async () => {
-      const result = await axios(`${environment.backendUrl}/batch/all`)
-      setBatches(result.data)
+      const result = await backendApi.get(`/batch/all`)
+      setBatches(result)
       // wineries = result.data
     }
     getBatchsListData()

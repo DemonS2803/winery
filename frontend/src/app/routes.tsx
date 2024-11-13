@@ -11,6 +11,8 @@ import {Vineyard} from "@app/Vineyard/Vineyard";
 import {Batch} from "@app/Batch/Batch";
 import {Store} from "@app/Store/Store";
 import {CustomerBucket} from "@app/CustomerBucket/CustomerBucket";
+import {BaseLoginPage} from "@app/Login/BaseLoginPage";
+import {Admin} from "@app/Admin/Admin";
 
 let routeFocusTimer: number;
 export interface IAppRoute {
@@ -31,7 +33,19 @@ export interface IAppRouteGroup {
 
 export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
+
+const adminRoutes: AppRouteConfig[] = [
+  {
+    component: Admin,
+    exact: true,
+    label: 'Administration',
+    path: '/admin',
+    title: 'Sudakov | Main Admin',
+  }
+];
+
 const routes: AppRouteConfig[] = [
+
   {
     component: Wineries,
     exact: true,
@@ -57,7 +71,7 @@ const routes: AppRouteConfig[] = [
     component: Store,
     exact: true,
     label: 'Store',
-    path: '/',
+    path: '/store',
     title: 'Sudakov | Main Store',
   },
   {
@@ -67,6 +81,13 @@ const routes: AppRouteConfig[] = [
     path: '/bucket',
     title: 'Sudakov | Main Bucket',
   },
+  {
+    component: Admin,
+    exact: true,
+    label: 'Administration',
+    path: '/admin',
+    title: 'Sudakov | Main Admin',
+  }
 ];
 
 // a custom hook for sending focus to the primary content container
@@ -91,6 +112,8 @@ const useA11yRouteChange = () => {
 const RouteWithTitleUpdates = ({ component: Component, title, ...rest }: IAppRoute) => {
   useA11yRouteChange();
   useDocumentTitle(title);
+
+
 
   function routeWithTitle(routeProps: RouteComponentProps) {
     return <Component {...rest} {...routeProps} />;
@@ -118,4 +141,4 @@ const AppRoutes = (): React.ReactElement => (
   </Switch>
 );
 
-export { AppRoutes, routes };
+export { AppRoutes, routes, adminRoutes };

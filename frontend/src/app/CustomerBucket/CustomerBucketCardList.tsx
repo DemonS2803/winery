@@ -5,6 +5,7 @@ import {DataList, DataListCell, DataListItem, DataListItemCells, DataListItemRow
 import {StoreItemCard} from "@app/Store/StoreItemCard";
 import {CustomerBucket} from "@app/CustomerBucket/CustomerBucket";
 import {CustomerBucketItemCard} from "@app/CustomerBucket/CustomerBucketItemCard";
+import {backendApi} from "@app/utils/axios-config";
 
 export const CustomerBucketCardList = () => {
 
@@ -12,9 +13,9 @@ export const CustomerBucketCardList = () => {
 
   useEffect(() => {
     const getCustomerBucketListData = async () => {
-      const result = await axios(`${environment.backendUrl}/bucket`)
-      setItems(result.data)
-      console.log(result.data)
+      const result = await backendApi.get(`/bucket`)
+      setItems(result)
+      console.log(result)
       // wineries = result.data
     }
     getCustomerBucketListData()

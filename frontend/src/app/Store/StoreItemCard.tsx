@@ -1,4 +1,4 @@
-import {BackgroundImage, Card, CardBody, CardTitle, Grid, GridItem, Text} from "@patternfly/react-core";
+import {BackgroundImage, Button, Card, CardBody, CardTitle, Grid, GridItem, Text} from "@patternfly/react-core";
 import React from "react";
 import {
   BackgroundImageBasic
@@ -6,6 +6,7 @@ import {
 
 import bottleSvg from '../../assets/bottle/STANDART.png'
 import {SmallBottle, StandartBottle} from "../icons/Bottles";
+import {backendApi} from "@app/utils/axios-config";
 
 const bottleSwitch = {
   'STANDART': <StandartBottle />,
@@ -27,6 +28,7 @@ export const StoreItemCard = ({ item }) => {
             <Text>Volume: {item.batch.volume}</Text>
             <Text>Price: {item.batch.price}</Text>
             <Text>Available: {item.bottlesAvailable}</Text>
+            <Button onClick={() => backendApi.put(`/bucket/add/${item.batch.id}`, {})}>BUY</Button>
           </CardBody>
         </GridItem>
       </Grid>

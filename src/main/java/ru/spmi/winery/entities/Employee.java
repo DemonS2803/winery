@@ -1,22 +1,22 @@
 package ru.spmi.winery.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.spmi.winery.enums.CustomerType;
 import ru.spmi.winery.enums.UserRole;
 
 @Data
 @Entity
 @Builder
-@Table(name = "customers")
+@Table(name = "employers")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer implements Logginable {
+public class Employee implements Logginable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,9 +26,7 @@ public class Customer implements Logginable {
     private String lastName;
     private String email;
     private String phone;
-    private String address;
-    @Enumerated(EnumType.STRING)
-    private CustomerType type;
+
 
     @Override
     public String getLogin() {
@@ -39,4 +37,5 @@ public class Customer implements Logginable {
     public String getAuthorities() {
         return UserRole.CUSTOMER.toString();
     }
+
 }

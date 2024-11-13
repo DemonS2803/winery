@@ -5,6 +5,7 @@ import {response} from "express";
 import {Flex, FlexItem, Gallery, GalleryItem} from "@patternfly/react-core";
 import {WineryCard} from "@app/Wineries/WineryCard";
 import React from "react";
+import {backendApi} from "@app/utils/axios-config";
 
 
 export const WineryCardList = () => {
@@ -13,8 +14,8 @@ export const WineryCardList = () => {
 
   useEffect(() => {
     const getWineriesListData = async () => {
-      const result = await axios(`${environment.backendUrl}/winery/all`)
-      setWineries(result.data)
+      const result = await backendApi.get(`/winery/all`)
+      setWineries(result)
       // wineries = result.data
     }
     getWineriesListData()

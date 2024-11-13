@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {Flex, FlexItem } from "@patternfly/react-core";
 import React from "react";
 import {VineyardCard} from "@app/Vineyard/VineyardCard";
+import {backendApi} from "@app/utils/axios-config";
 
 
 export const VineyardCardList = () => {
@@ -12,8 +13,8 @@ export const VineyardCardList = () => {
 
   useEffect(() => {
     const getVineyardsListData = async () => {
-      const result = await axios(`${environment.backendUrl}/vineyard/all`)
-      setVineyards(result.data)
+      const result = await backendApi.get(`/vineyard/all`)
+      setVineyards(result)
       // wineries = result.data
     }
     getVineyardsListData()

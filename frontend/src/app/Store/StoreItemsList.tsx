@@ -4,6 +4,7 @@ import {environment} from "@app/environment";
 import {Flex, FlexItem} from "@patternfly/react-core";
 import {BatchCard} from "@app/Batch/BatchCard";
 import {StoreItemCard} from "@app/Store/StoreItemCard";
+import {backendApi} from "@app/utils/axios-config";
 
 export const StoreItemsCardList = () => {
 
@@ -11,9 +12,9 @@ export const StoreItemsCardList = () => {
 
   useEffect(() => {
     const getStoreItemsListData = async () => {
-      const result = await axios(`${environment.backendUrl}/inventory/available`)
-      setItems(result.data)
-      console.log(result.data)
+      const result = await backendApi.get(`/inventory/available`)
+      setItems(result)
+      console.log(result)
       // wineries = result.data
     }
     getStoreItemsListData()
