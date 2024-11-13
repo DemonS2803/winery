@@ -19,7 +19,7 @@ import ru.spmi.winery.enums.UserRole;
 public class Employee implements Logginable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String password;
     private String firstName;

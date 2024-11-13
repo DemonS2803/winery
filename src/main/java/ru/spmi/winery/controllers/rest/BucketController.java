@@ -43,4 +43,9 @@ public class BucketController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/orders")
+    public ResponseEntity<List<Order>> getUserOrders() {
+        return new ResponseEntity<>(bucketService.getOrder(SecurityContextHolder.getContext().getAuthentication().getName()), HttpStatus.OK);
+    }
+
 }

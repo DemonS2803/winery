@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 public class Inventory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Batch batch;

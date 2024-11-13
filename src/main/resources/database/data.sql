@@ -1,4 +1,4 @@
--- Insert 1: Inserting details for "Vineyard Valley"
+-- Insert 1: Inserting details for "Vineyard Valley".id
 INSERT INTO wineries (id, name, address, build_date, phone, email, description)
 VALUES (1, 'Vineyard Valley', '1234 Vine Lane, Napa, CA', '1985-05-15', '555-123-4567', 'info@vineyardvalley.com', 'www.vineyardvalley.com'),
        (2, 'Sunset Hills Winery', '5678 Sunset Road, Sonoma, CA', '1992-08-21', '555-987-6543', 'contact@sunsethillswinery.com', 'www.sunsethillswinery.com'),

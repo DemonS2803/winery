@@ -7,14 +7,14 @@ import {CustomerBucket} from "@app/CustomerBucket/CustomerBucket";
 import {CustomerBucketItemCard} from "@app/CustomerBucket/CustomerBucketItemCard";
 import {backendApi} from "@app/utils/axios-config";
 
-export const CustomerBucketCardList = () => {
+export const CustomerOrderCardList = () => {
 
-  const [items, setItems] = useState([])
+  const [orders, setOrders] = useState([])
 
   useEffect(() => {
     const getCustomerBucketListData = async () => {
-      const result = await backendApi.get(`/bucket`)
-      setItems(result)
+      const result = await backendApi.get(`/bucket/orders`)
+      setOrders(result)
       console.log(result)
       // wineries = result.data
     }
@@ -24,16 +24,16 @@ export const CustomerBucketCardList = () => {
   // @ts-ignore
   return (
     <DataList aria-label={'single action data list example '} >
-      {items.map(item => (
+      {orders.map(item => (
         <DataListItem aria-labelledby="single-action-item1">
           <DataListItemRow>
             <DataListItemCells dataListCells={[
               <DataListCell key="primary content">
-                <span id="single-action-item1">{item.batch.wine.name}</span>
+                <span id="single-action-item1">{item.id}</span>
               </DataListCell>,
-              <DataListCell key="secondary content">{item.batch.price}$</DataListCell>,
-              <DataListCell key="secondary content">{item.id.position}</DataListCell>,
-              <DataListCell key="secondary content">{item.id.count}</DataListCell>,
+              <DataListCell key="secondary content">{item.created}</DataListCell>,
+              <DataListCell key="secondary content">{item.status}</DataListCell>,
+              <DataListCell key="secondary content">{item.totalPrice}</DataListCell>,
             ]}>
 
 
